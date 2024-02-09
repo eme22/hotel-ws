@@ -27,7 +27,7 @@ public class Usuario {
     private BigInteger dni;
     @Column(unique = true)
     private String correoElectronico;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String password;
     @Column
     private String numeroTelefono;
