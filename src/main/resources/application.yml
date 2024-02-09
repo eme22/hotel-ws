@@ -1,3 +1,4 @@
+
 spring:
 #  web:
 #    resources:
@@ -21,3 +22,5 @@ spring:
       platform: postgres
       mode: embedded
       continue-on-error: true
+server:
+  port: ${PORT:80}
