@@ -24,3 +24,4 @@ spring:
       continue-on-error: true
 server:
   port: ${PORT:80}
+  forward-headers-strategy: framework
