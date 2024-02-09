@@ -1,0 +1,23 @@
+spring:
+#  web:
+#    resources:
+#      static-locations: classpath:/static/, file:${UPLOAD_PATH:F:\Multimedia\Downloads\mil-frontend-ng\dist\mil-frontend-ng\}
+  datasource:
+    url: ${MYSQL_URL:jdbc:mariadb://monorail.proxy.rlwy.net:33934/railway?autoReconnect=true}
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:ADChFh3C-bbe33gcdb46BcAdCdDGe3h-}
+    driverClassName: org.mariadb.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  sql:
+    init:
+      platform: postgres
+      mode: embedded
+      continue-on-error: true
