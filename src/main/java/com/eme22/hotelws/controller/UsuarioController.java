@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar-por-email/{email}")
-    public Usuario buscarUsuarioPorEmail(@RequestParam String email) {
+    public Usuario buscarUsuarioPorEmail(@PathVariable String email) {
         return usuarioService.getUsuarioByCorreoElectronico(email).orElse(null);
     }
 

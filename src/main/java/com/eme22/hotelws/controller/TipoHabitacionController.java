@@ -61,9 +61,9 @@ public class TipoHabitacionController {
     }
     @RequestMapping(method = RequestMethod.POST, value = "/upload/{id}",
             consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void cargarImagen(@PathVariable("id") String sucursalId, @RequestParam("file") MultipartFile file) {
+    public void cargarImagen(@PathVariable String id, @RequestParam("file") MultipartFile file) {
 
-        TipoHabitacion tipoHabitacion = tipoHabitacionService.getTipoHabitacion(UUID.fromString(sucursalId)).orElse(null);
+        TipoHabitacion tipoHabitacion = tipoHabitacionService.getTipoHabitacion(UUID.fromString(id)).orElse(null);
 
         if (tipoHabitacion == null) {
             System.out.println("Tipo no encontrado");
