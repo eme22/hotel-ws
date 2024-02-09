@@ -51,7 +51,7 @@ public class TipoHabitacionService {
         Optional<TipoHabitacion> sucursal = tipoHabitacionRepository.findById(id);
         if (sucursal.isPresent()) {
             String fileName = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-            String path = "/app/" + fileName;
+            String path = "/app/static/" + fileName;
             File newFile = new File(path);
             FileUtils.writeByteArrayToFile(newFile, file.getBytes());
             sucursal.get().setImagen(fileName);
