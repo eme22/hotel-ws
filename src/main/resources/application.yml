@@ -2,7 +2,7 @@
 spring:
   web:
     resources:
-      static-locations: classpath:/static/, file:${UPLOAD_PATH:.}
+      static-locations: classpath:/static/, file:${UPLOAD_PATH:/app/}
   datasource:
     url: ${MYSQL_URL:jdbc:mariadb://monorail.proxy.rlwy.net:33934/railway?autoReconnect=true}
     username: ${MYSQLUSER:root}
