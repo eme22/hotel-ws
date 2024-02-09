@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -18,7 +20,8 @@ import java.util.UUID;
 public class Reserva {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @JdbcType(VarcharJdbcType.class)
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "usuario_id")

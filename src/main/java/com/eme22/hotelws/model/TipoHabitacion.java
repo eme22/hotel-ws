@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -18,16 +20,15 @@ public class TipoHabitacion {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @JdbcType(VarcharJdbcType.class)
     private UUID id;
     @Column
     private String nombre;
     @Column
     private String descripcion;
-
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] imagen;
+    @Column
+    private String imagen;
     @Column
     private Integer cantidadPersonas;
     @Column

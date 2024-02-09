@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -18,7 +21,8 @@ public class Habitacion {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @JdbcType(VarcharJdbcType.class)
     private UUID id;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

@@ -1,8 +1,8 @@
 
 spring:
-#  web:
-#    resources:
-#      static-locations: classpath:/static/, file:${UPLOAD_PATH:F:\Multimedia\Downloads\mil-frontend-ng\dist\mil-frontend-ng\}
+  web:
+    resources:
+      static-locations: classpath:/static/, file:${UPLOAD_PATH:.}
   datasource:
     url: ${MYSQL_URL:jdbc:mariadb://monorail.proxy.rlwy.net:33934/railway?autoReconnect=true}
     username: ${MYSQLUSER:root}

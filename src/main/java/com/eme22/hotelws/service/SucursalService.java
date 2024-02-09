@@ -2,10 +2,15 @@ package com.eme22.hotelws.service;
 
 import com.eme22.hotelws.model.Sucursal;
 import com.eme22.hotelws.repository.SucursalRepository;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,6 +44,18 @@ public class SucursalService {
 
     public Page<Sucursal> getSucursalesByNombreLikeIgnoreCase(String nombre, Pageable pageable) {
         return sucursalRepository.findByNombreLikeIgnoreCase(nombre, pageable);
+    }
+
+    public void uploadImageToAssets(UUID id, MultipartFile file) throws IOException {
+        Optional<Sucursal> sucursal = sucursalRepository.findById(id);
+        if (sucursal.isPresent()) {
+            String fileName = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+            String path = "./" + fileName;
+            File newFile = new File(path);
+            FileUtils.writeByteArrayToFile(newFile, file.getBytes());
+            sucursal.get().setImagen(fileName);
+            sucursalRepository.save(sucursal.get());
+        }
     }
 
 }

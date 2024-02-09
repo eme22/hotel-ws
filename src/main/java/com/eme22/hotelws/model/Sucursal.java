@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.*;
 
@@ -17,15 +19,15 @@ import java.util.*;
 public class Sucursal {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @JdbcType(VarcharJdbcType.class)
     private UUID id;
     @Column
     private String nombre;
     @Column
     private String direccion;
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] imagen;
+    @Column
+    private String imagen;
     @Column
     private String numeroTelefono;
     @OneToMany(targetEntity = Habitacion.class , mappedBy = "sucursal", fetch = FetchType.LAZY)

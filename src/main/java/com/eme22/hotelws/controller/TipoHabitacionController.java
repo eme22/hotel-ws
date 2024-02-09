@@ -63,24 +63,11 @@ public class TipoHabitacionController {
             consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public void cargarImagen(@PathVariable String id, @RequestParam("file") MultipartFile file) {
 
-        TipoHabitacion tipoHabitacion = tipoHabitacionService.getTipoHabitacion(UUID.fromString(id)).orElse(null);
-
-        if (tipoHabitacion == null) {
-            System.out.println("Tipo no encontrado");
-            return;
-        }
-
         try {
-
-            byte[] image = file.getInputStream().readAllBytes();
-
-            tipoHabitacion.setImagen(image);
-
+            tipoHabitacionService.uploadImageToAssets(UUID.fromString(id), file);
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
 
-        tipoHabitacionService.updateTipoHabitacion(tipoHabitacion);
     }
 }

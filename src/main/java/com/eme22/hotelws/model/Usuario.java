@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -17,7 +19,8 @@ import java.util.*;
 public class Usuario {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @JdbcType(VarcharJdbcType.class)
     private UUID id;
     @Column
     private String nombre;

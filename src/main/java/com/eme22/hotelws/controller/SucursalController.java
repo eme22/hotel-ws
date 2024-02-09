@@ -64,25 +64,11 @@ public class SucursalController {
             consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String id) {
 
-        Sucursal sucursal = sucursalService.getSucursal(UUID.fromString(id)).orElse(null);
-
-        if (sucursal == null) {
-            System.out.println("Sucursal no encontrada");
-            return;
-        }
-
         try {
-
-            byte[] image = file.getInputStream().readAllBytes();
-
-            sucursal.setImagen(image);
-
+            sucursalService.uploadImageToAssets(UUID.fromString(id), file);
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
-
-        sucursalService.updateSucursal(sucursal);
 
     }
 
