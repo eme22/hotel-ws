@@ -30,11 +30,14 @@ public class Habitacion {
     private Sucursal sucursal;
     @Column
     private Integer numeroHabitacion;
+    @Column
+    private Integer piso;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "tipo_habitacion_id")
     private TipoHabitacion tipoHabitacion;
+    @Enumerated(EnumType.STRING)
     @Column
-    private String estado;
+    private EstadoHabitacion estado;
 
     @Override
     public boolean equals(Object o) {
@@ -47,5 +50,11 @@ public class Habitacion {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public enum EstadoHabitacion {
+        DISPONIBLE,
+        NO_DISPONIBLE,
+        RESERVADA_SINPAGO
     }
 }

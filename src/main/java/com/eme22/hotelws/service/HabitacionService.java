@@ -71,6 +71,10 @@ public class HabitacionService {
         return habitacionRepository.findBySucursal_IdAndTipoHabitacion_PrecioPorDiaGreaterThanEqual(sucursalId, precioPorDia, pageable);
     }
 
+    public Page<Habitacion> getHabitacionesByPiso(UUID sucursalId, Integer piso, Pageable pageable) {
+        return habitacionRepository.findBySucursal_IdAndPiso(sucursalId, piso, pageable);
+    }
+
 
     public Page<Habitacion> getHabitacionesByFechaDisponible(UUID sucursal, OffsetDateTime fecha, Pageable pageable) {
 

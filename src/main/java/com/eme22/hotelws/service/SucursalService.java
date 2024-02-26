@@ -46,6 +46,10 @@ public class SucursalService {
         return sucursalRepository.findByNombreLikeIgnoreCase(nombre, pageable);
     }
 
+    public Optional<Integer> getPisos(UUID id) {
+        return sucursalRepository.findById(id).map(Sucursal::getPisos);
+    }
+
     public void uploadImageToAssets(UUID id, MultipartFile file) throws IOException {
         Optional<Sucursal> sucursal = sucursalRepository.findById(id);
         if (sucursal.isPresent()) {

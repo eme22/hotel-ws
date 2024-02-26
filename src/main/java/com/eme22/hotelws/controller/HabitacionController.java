@@ -74,6 +74,16 @@ public class HabitacionController {
             return habitacionService.getHabitacionesByPrecioPorDia(UUID.fromString(sucursalId), precioPorDia, pageable);
     }
 
+    @GetMapping("/buscar-por-piso")
+    public Page<Habitacion> buscarHabitacionesPorPiso(
+            @RequestParam(name = "sucursalId") String sucursalId,
+            @RequestParam(name = "piso") Integer piso,
+            @RequestParam(name = "page", defaultValue = "0") int pageNumber,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return habitacionService.getHabitacionesByPiso(UUID.fromString(sucursalId), piso, pageable);
+    }
+
     @PostMapping
     public Habitacion crearHabitacion(@RequestBody Habitacion habitacion) {
         return habitacionService.createHabitacion(habitacion);

@@ -30,6 +30,8 @@ public class Sucursal {
     private String imagen;
     @Column
     private String numeroTelefono;
+    @Column
+    private Integer pisos;
     @OneToMany(targetEntity = Habitacion.class , mappedBy = "sucursal", fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude

@@ -72,4 +72,9 @@ public class SucursalController {
 
     }
 
+    @GetMapping("/pisos/{id}")
+    public Integer obtenerPisos(@PathVariable String id) {
+        return sucursalService.getPisos(UUID.fromString(id)).orElse(null);
+    }
+
 }

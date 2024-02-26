@@ -26,6 +26,7 @@ public interface HabitacionRepository extends JpaRepository<Habitacion, UUID>, P
 
     Page<Habitacion> findBySucursal_IdAndTipoHabitacion_PrecioPorDiaGreaterThanEqual(UUID id, Double precioPorDia, Pageable pageable);
 
+    Page<Habitacion> findBySucursal_IdAndPiso(UUID id, Integer piso, Pageable pageable);
 
 
 
