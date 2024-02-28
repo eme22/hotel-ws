@@ -84,6 +84,13 @@ public class HabitacionController {
         return habitacionService.getHabitacionesByPiso(UUID.fromString(sucursalId), piso, pageable);
     }
 
+    @GetMapping("/buscar-por-numero")
+    public Habitacion buscarHabitacionPorNumero(
+            @RequestParam(name = "sucursalId") String sucursalId,
+            @RequestParam(name = "numero") Integer numero) {
+        return habitacionService.getHabitacionByNumero(UUID.fromString(sucursalId), numero).orElse(null);
+    }
+
     @PostMapping
     public Habitacion crearHabitacion(@RequestBody Habitacion habitacion) {
         return habitacionService.createHabitacion(habitacion);

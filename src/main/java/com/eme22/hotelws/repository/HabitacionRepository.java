@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface HabitacionRepository extends JpaRepository<Habitacion, UUID>, PagingAndSortingRepository<Habitacion, UUID> {
+    Optional<Habitacion> findBySucursal_IdAndNumeroHabitacion(UUID id, Integer numeroHabitacion);
 
     Page<Habitacion> findBySucursalId(UUID sucursalId, Pageable pageable);
 

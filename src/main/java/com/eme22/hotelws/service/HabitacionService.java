@@ -50,6 +50,10 @@ public class HabitacionService {
         return habitacionRepository.findBySucursalId(sucursalId, pageable);
     }
 
+    public Optional<Habitacion> getHabitacionByNumero(UUID sucursalId, Integer numero) {
+        return habitacionRepository.findBySucursal_IdAndNumeroHabitacion(sucursalId, numero);
+    }
+
     public Page<Habitacion> getHabitacionesByPrecioPorHora(UUID sucursalId, Double precioPorHora, Pageable pageable) {
         return habitacionRepository.findBySucursal_IdAndTipoHabitacion_PrecioPorHora(sucursalId, precioPorHora, pageable);
     }
