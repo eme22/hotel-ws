@@ -76,9 +76,9 @@ public class HabitacionService {
     }
 
 
-    public Page<Habitacion> getHabitacionesByFechaDisponible(UUID sucursal, OffsetDateTime fecha, Pageable pageable) {
+    public Page<Habitacion> getHabitacionesByFechaDisponible(UUID sucursal, OffsetDateTime fechaInicio, OffsetDateTime fechaFin,Pageable pageable) {
 
-        Page<Reserva> reservas = reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fecha, fecha, pageable);
+        Page<Reserva> reservas = reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fechaInicio, fechaFin, pageable);
 
         Page<Habitacion> habitaciones = habitacionRepository.findBySucursalId(sucursal, pageable);
 

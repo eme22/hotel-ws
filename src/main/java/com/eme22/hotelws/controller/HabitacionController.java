@@ -107,11 +107,11 @@ public class HabitacionController {
     @GetMapping("/buscar-por-fecha-disponible")
     public Page<Habitacion> buscarHabitacionesPorFechaDisponible(
             @RequestParam(name = "sucursalId") String sucursalId,
-            @RequestParam(name = "fecha") String fecha,
+            @RequestParam(name = "fechaInicio") String fechaInicio,
+            @RequestParam(name = "fechaFin") String fechaFin,
             @RequestParam(name = "page", defaultValue = "0") int pageNumber,
             @RequestParam(name = "size", defaultValue = "10") int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return habitacionService.getHabitacionesByFechaDisponible(UUID.fromString(sucursalId), java.time.OffsetDateTime.parse(fecha), pageable);
+        return habitacionService.getHabitacionesByFechaDisponible(UUID.fromString(sucursalId), java.time.OffsetDateTime.parse(fechaInicio), java.time.OffsetDateTime.parse(fechaFin),pageable);
     }
-
 }
