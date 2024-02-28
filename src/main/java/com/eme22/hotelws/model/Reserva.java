@@ -1,5 +1,6 @@
 package com.eme22.hotelws.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,8 +24,10 @@ public class Reserva {
     @GeneratedValue
     @JdbcType(VarcharJdbcType.class)
     private UUID id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "usuario_id")
+    @JsonIgnore
+    @ToString.Exclude
     private Usuario usuario;
     @ManyToOne
     @JoinColumn(name = "habitacion_id")
