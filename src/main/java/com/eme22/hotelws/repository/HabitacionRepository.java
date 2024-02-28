@@ -4,7 +4,6 @@ import com.eme22.hotelws.model.Habitacion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,9 +26,4 @@ public interface HabitacionRepository extends JpaRepository<Habitacion, UUID>, P
     Page<Habitacion> findBySucursal_IdAndTipoHabitacion_PrecioPorDiaGreaterThanEqual(UUID id, Double precioPorDia, Pageable pageable);
 
     Page<Habitacion> findBySucursal_IdAndPiso(UUID id, Integer piso, Pageable pageable);
-
-
-
-
-
 }

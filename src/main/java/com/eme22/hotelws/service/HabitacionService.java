@@ -5,10 +5,13 @@ import com.eme22.hotelws.model.Reserva;
 import com.eme22.hotelws.repository.HabitacionRepository;
 import com.eme22.hotelws.repository.ReservaRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -78,11 +81,25 @@ public class HabitacionService {
 
     public Page<Habitacion> getHabitacionesByFechaDisponible(UUID sucursal, OffsetDateTime fechaInicio, OffsetDateTime fechaFin,Pageable pageable) {
 
-        Page<Reserva> reservas = reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fechaInicio, fechaFin, pageable);
+        Pageable pageRequest = createPageRequestUsing(pageable.getPageNumber(), pageable.getPageSize());
 
-        Page<Habitacion> habitaciones = habitacionRepository.findBySucursalId(sucursal, pageable);
+        Page<Reserva> reservas = reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fechaInicio, fechaFin, Pageable.unpaged());
 
-        return (Page<Habitacion>) habitaciones.filter(habitacion -> reservas.stream().noneMatch(reserva -> reserva.getHabitacion().getId().equals(habitacion.getId())));
+        Page<Habitacion> habitaciones = habitacionRepository.findBySucursalId(sucursal, Pageable.unpaged());
+
+        List<Habitacion> habitacionList = habitaciones.filter(habitacion -> reservas.stream().noneMatch(reserva -> reserva.getHabitacion().getId().equals(habitacion.getId()))).stream().toList();
+
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageRequest.getPageSize()), habitacionList.size());
+
+        List<Habitacion> pageContent = habitacionList.subList(start, end);
+
+        return new PageImpl<>(pageContent, pageRequest, pageContent.size());
+
+    }
+
+    private Pageable createPageRequestUsing(int page, int size) {
+        return PageRequest.of(page, size);
     }
 
 }
