@@ -36,9 +36,11 @@ public class Usuario {
     private String numeroTelefono;
     @Column
     private Integer tipoUsuario;
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /**
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<Reserva> reservas = new HashSet<>();
+    */
 
     @Override
     public boolean equals(Object o) {
