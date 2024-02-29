@@ -24,10 +24,8 @@ public class Reserva {
     @GeneratedValue
     @JdbcType(VarcharJdbcType.class)
     private UUID id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
-    @JsonIgnore
-    @ToString.Exclude
     private Usuario usuario;
     @ManyToOne
     @JoinColumn(name = "habitacion_id")
