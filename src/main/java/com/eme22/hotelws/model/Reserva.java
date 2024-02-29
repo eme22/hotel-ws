@@ -24,7 +24,7 @@ public class Reserva {
     @GeneratedValue
     @JdbcType(VarcharJdbcType.class)
     private UUID id;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     @ManyToOne
