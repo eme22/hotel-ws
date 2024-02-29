@@ -36,7 +36,7 @@ public class Usuario {
     private String numeroTelefono;
     @Column
     private Integer tipoUsuario;
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, , cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Reserva> reservas = new HashSet<>();
 
