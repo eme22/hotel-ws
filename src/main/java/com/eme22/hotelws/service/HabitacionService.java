@@ -14,6 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class HabitacionService {
@@ -87,11 +88,20 @@ public class HabitacionService {
 
         Pageable pageRequest = createPageRequestUsing(pageable.getPageNumber(), pageable.getPageSize());
 
-        Page<Reserva> reservas = reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fechaInicio, fechaFin, Pageable.unpaged());
+        List<UUID> habitacionesEnReserva = reservaRepository.findByFechaCheckInLessThanEqualAndFechaCheckOutGreaterThanEqual(fechaInicio, fechaFin, Pageable.unpaged())
+                .getContent().stream()
+                .map(reserva -> reserva.getHabitacion().getId())
+                .collect(Collectors.toList());
 
         Page<Habitacion> habitaciones = habitacionRepository.findBySucursalId(sucursal, Pageable.unpaged());
 
-        List<Habitacion> habitacionList = habitaciones.filter(habitacion -> reservas.stream().noneMatch(reserva -> reserva.getHabitacion().getId().equals(habitacion.getId()))).stream().toList();
+        List<Habitacion> habitacionList = habitaciones.getContent();
+
+        habitacionList.forEach(habitacion -> {
+            if (habitacionesEnReserva.contains(habitacion.getId())) {
+                habitacion.setEstado(Habitacion.EstadoHabitacion.NO_DISPONIBLE);
+            }
+        });
 
         int start = (int) pageRequest.getOffset();
         int end = Math.min((start + pageRequest.getPageSize()), habitacionList.size());

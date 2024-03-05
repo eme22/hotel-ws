@@ -19,4 +19,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, UUID>, PagingA
 
     Page<Reserva> findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(OffsetDateTime fechaEntrada, OffsetDateTime fechaSalida, Pageable pageable);
 
+    Page<Reserva> findByFechaCheckInLessThanEqualAndFechaCheckOutGreaterThanEqual(OffsetDateTime fechaSalida, OffsetDateTime fechaEntrada, Pageable pageable);
+
+
 }

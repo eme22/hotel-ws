@@ -57,4 +57,8 @@ public class ReservaService {
         return reservaRepository.findByFechaCheckInGreaterThanEqualAndFechaCheckOutLessThanEqual(fechaEntrada, fechaSalida, pageable);
     }
 
+    public Page<Reserva> getReservasByFechaSalidaGreaterThanEqualAndFechaEntradaLessThanEqual(OffsetDateTime fechaSalida, OffsetDateTime fechaEntrada, Pageable pageable) {
+        return reservaRepository.findByFechaCheckInLessThanEqualAndFechaCheckOutGreaterThanEqual(fechaSalida, fechaEntrada, pageable);
+    }
+
 }
