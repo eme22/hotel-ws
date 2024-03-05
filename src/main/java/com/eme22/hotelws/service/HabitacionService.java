@@ -88,10 +88,10 @@ public class HabitacionService {
 
         Pageable pageRequest = createPageRequestUsing(pageable.getPageNumber(), pageable.getPageSize());
 
-        List<UUID> habitacionesEnReserva = reservaRepository.findByFechaCheckInLessThanEqualAndFechaCheckOutGreaterThanEqual(fechaInicio, fechaFin, Pageable.unpaged())
+        List<UUID> habitacionesEnReserva = reservaRepository.findByFechaCheckInLessThanEqualAndFechaCheckOutGreaterThanEqual(fechaFin, fechaInicio, Pageable.unpaged())
                 .getContent().stream()
                 .map(reserva -> reserva.getHabitacion().getId())
-                .collect(Collectors.toList());
+                .toList();
 
         Page<Habitacion> habitaciones = habitacionRepository.findBySucursalId(sucursal, Pageable.unpaged());
 
